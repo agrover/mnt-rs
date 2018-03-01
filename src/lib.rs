@@ -16,6 +16,7 @@ pub use error::*;
 
 mod error;
 pub mod mount;
+pub mod mountinfo;
 
 use std::str::FromStr;
 
