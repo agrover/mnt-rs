@@ -15,6 +15,7 @@
 extern crate libc;
 
 use error::*;
+use MntOps;
 use self::libc::c_int;
 use std::cmp::Ordering;
 use std::convert::{AsRef, From};
@@ -34,43 +35,6 @@ pub enum DumpField {
 }
 
 pub type PassField = Option<c_int>;
-
-#[derive(Clone, PartialEq, Eq, Debug)]
-pub enum MntOps {
-    Atime(bool),
-    DirAtime(bool),
-    RelAtime(bool),
-    Dev(bool),
-    Exec(bool),
-    Suid(bool),
-    Write(bool),
-    Extra(String),
-}
-
-impl FromStr for MntOps {
-    type Err = LineError;
-
-    fn from_str(token: &str) -> Result<MntOps, LineError> {
-        Ok(match token {
-            "atime" => MntOps::Atime(true),
-            "noatime" => MntOps::Atime(false),
-            "diratime" => MntOps::DirAtime(true),
-            "nodiratime" => MntOps::DirAtime(false),
-            "relatime" => MntOps::RelAtime(true),
-            "norelatime" => MntOps::RelAtime(false),
-            "dev" => MntOps::Dev(true),
-            "nodev" => MntOps::Dev(false),
-            "exec" => MntOps::Exec(true),
-            "noexec" => MntOps::Exec(false),
-            "suid" => MntOps::Suid(true),
-            "nosuid" => MntOps::Suid(false),
-            "rw" => MntOps::Write(true),
-            "ro" => MntOps::Write(false),
-            // TODO: Replace with &str
-            extra => MntOps::Extra(extra.to_string()),
-        })
-    }
-}
 
 #[derive(Clone, Debug)]
 pub enum MountParam<'a> {
