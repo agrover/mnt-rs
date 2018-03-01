@@ -14,7 +14,7 @@
 
 extern crate mnt;
 
-use mnt::{get_submounts, VecMountEntry};
+use mnt::mount::{get_submounts, VecMountEntry};
 use std::env::args;
 use std::path::{Path, PathBuf};
 

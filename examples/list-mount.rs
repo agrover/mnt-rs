@@ -14,7 +14,7 @@
 
 extern crate mnt;
 
-use mnt::get_mount;
+use mnt::mount::get_mount;
 use std::env::args;
 use std::path::{Path, PathBuf};
 
